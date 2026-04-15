@@ -1,0 +1,20 @@
+{
+  "name": "pre-k12-chinese-ai-diagnostic-research",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.30.3",
+  "scripts": {
+    "bootstrap": "pnpm install && uv sync --project apps/api",
+    "dev": "concurrently -n web,api -c cyan,green \"pnpm dev:web\" \"pnpm dev:api\"",
+    "dev:web": "pnpm --dir apps/web dev --host 127.0.0.1 --port 5173",
+    "dev:api": "uv run --project apps/api fastapi dev apps/api/app/main.py --host 127.0.0.1 --port 8000",
+    "build": "pnpm build:web && pnpm check:api && pnpm check:rust",
+    "build:web": "pnpm --dir apps/web build",
+    "lint:web": "pnpm --dir apps/web lint",
+    "check:api": "uv run --project apps/api python -m compileall apps/api/app",
+    "check:rust": "\"%USERPROFILE%\\.cargo\\bin\\cargo\" check -p text_engine"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

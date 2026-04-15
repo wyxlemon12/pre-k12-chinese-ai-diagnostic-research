@@ -1,1 +1,11 @@
 reference/**/*.pdf
+node_modules/
+dist/
+target/
+.venv/
+.DS_Store
+pnpm-lock.yaml
+apps/api/.python-version
+apps/api/.venv/
+
+__pycache__/

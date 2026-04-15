@@ -16,8 +16,39 @@
   [2026-04-16-age-6-chinese-reading-diagnostic-design.md](./docs/superpowers/specs/2026-04-16-age-6-chinese-reading-diagnostic-design.md)
 - 课堂案例笔记：
   [lesson-case-notes.md](./docs/lesson-case-notes.md)
+- 工程 harness 说明：
+  [engineering-harness.md](./docs/engineering-harness.md)
 - 本地参考材料：
   `reference/`
+
+## 技术方向
+
+当前设计稿已经补入首版技术选型，核心组合为：
+
+- 前端：`React + TypeScript`
+- 后端主服务：`Python + FastAPI`
+- 高性能或本地化模块：`Rust`
+
+这个组合的意图不是堆技术，而是把三件事分清楚：
+
+- React 负责教师工作台和 demo 交互
+- Python 负责教案拆解、知识图谱、诊断逻辑和 LLM 编排
+- Rust 负责后续值得性能化或本地化的模块
+
+## 已部署的工程环境
+
+当前仓库已经部署了可直接继续编程的 harness：
+
+- `apps/web`：React + TypeScript + Vite
+- `apps/api`：FastAPI + uv
+- `crates/text_engine`：Rust crate
+
+启动命令：
+
+```powershell
+pnpm bootstrap
+pnpm dev
+```
 
 ## 核心结论
 
@@ -43,4 +74,3 @@
 
 - 仓库中的 PDF 参考材料保留在本地研究环境，不作为公开仓库分发内容。
 - 公开仓库以内文档、结构化笔记和来源链接为主，避免直接再分发可能涉及版权限制的材料。
-

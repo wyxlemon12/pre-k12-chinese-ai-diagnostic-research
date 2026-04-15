@@ -1,0 +1,153 @@
+.shell {
+  min-height: 100vh;
+  padding: 48px 24px 72px;
+  color: #12202b;
+  background:
+    radial-gradient(circle at top left, rgba(233, 191, 118, 0.38), transparent 28%),
+    radial-gradient(circle at top right, rgba(112, 169, 143, 0.2), transparent 26%),
+    linear-gradient(180deg, #f7f0e3 0%, #f5f7f3 50%, #eef2f7 100%);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(280px, 0.9fr);
+  gap: 24px;
+  align-items: stretch;
+  margin: 0 auto 28px;
+  max-width: 1180px;
+}
+
+.hero-copy,
+.status-card,
+.panel {
+  border: 1px solid rgba(18, 32, 43, 0.1);
+  border-radius: 28px;
+  background: rgba(255, 252, 246, 0.86);
+  box-shadow: 0 16px 40px rgba(16, 30, 41, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.hero-copy {
+  padding: 32px;
+}
+
+.eyebrow,
+.card-label {
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #8d5d28;
+}
+
+.hero h1 {
+  margin: 0 0 18px;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1.02;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.lede {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #3d4c58;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.hero-actions a {
+  text-decoration: none;
+  color: #12202b;
+  border: 1px solid rgba(18, 32, 43, 0.16);
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.status-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  padding: 28px;
+}
+
+.status-card strong {
+  font-size: 1.6rem;
+}
+
+.status-card span,
+.note,
+.panel li {
+  color: #485764;
+}
+
+.status-card code,
+.commands code {
+  display: inline-flex;
+  align-self: flex-start;
+  border-radius: 14px;
+  padding: 8px 12px;
+  background: #12202b;
+  color: #f7f2e9;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin: 0 auto 20px;
+  max-width: 1180px;
+}
+
+.panel {
+  padding: 24px;
+}
+
+.panel h2 {
+  margin: 0 0 12px;
+  font-size: 1.35rem;
+}
+
+.panel ul {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.7;
+}
+
+.runbook {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.commands {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+@media (max-width: 900px) {
+  .shell {
+    padding: 24px 16px 48px;
+  }
+
+  .hero,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy,
+  .status-card,
+  .panel {
+    border-radius: 22px;
+  }
+}
