@@ -33,11 +33,26 @@ Rust 工具链已经在当前机器安装完成；如果换到新机器，需要
 pnpm dev
 ```
 
+等价的 API 单独启动命令：
+
+```powershell
+uv run --project apps/api python -m uvicorn app.main:app --app-dir apps/api --reload --host 127.0.0.1 --port 8000
+```
+
 默认端口：
 
 - React: `http://127.0.0.1:5173`
 - FastAPI: `http://127.0.0.1:8000`
 - FastAPI docs: `http://127.0.0.1:8000/docs`
+
+## 浏览器连通说明
+
+为了让浏览器中的教师工作台可以直接访问本地 API，这轮已经补上：
+
+- `CORSMiddleware`
+- 针对 `Access-Control-Request-Private-Network: true` 的预检放行
+
+这意味着在 `http://127.0.0.1:5173` 打开的前端，可以正常请求 `http://127.0.0.1:8000` 的 lesson parse、pathways 和 diagnose 接口。
 
 ## 验证命令
 
@@ -53,8 +68,13 @@ pnpm check:rust
 - `GET /healthz`
   - 健康检查
 - `POST /api/v1/lessons/parse`
-  - 输入课文标题和文本
-  - 输出目标词、目标句、理解点和证据点的最小结构
+  - 输入课文标题、主题和文本
+  - 输出本课三件套、观察点、工作纸映射
+- `POST /api/v1/lessons/pathways`
+  - 输出起步支持、标准课堂和延展表达三类路径卡
+- `POST /api/v1/observations/diagnose`
+  - 输入观察点、工作纸结果和教师备注
+  - 输出证据链诊断与下一步教学建议
 
 ## 下一步建议
 

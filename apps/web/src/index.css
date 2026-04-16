@@ -2,8 +2,13 @@
   font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #12202b;
-  background: #eef2f7;
+  color: #173247;
+  background: #edf2f6;
+  --ink-strong: #173247;
+  --ink-muted: #506172;
+  --ink-soft: #6c7b88;
+  --accent-green: #4d7e63;
+  --accent-burnt: #9a6731;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -23,8 +28,10 @@ body,
 
 body {
   min-width: 320px;
+  margin: 0;
 }
 
 a {
   font: inherit;
+  color: inherit;
 }
