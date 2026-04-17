@@ -1,0 +1,383 @@
+<style>
+  .page {
+    display: grid;
+    gap: 18px;
+  }
+
+  .intro {
+    max-width: 980px;
+  }
+
+  .pill-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #edf4ff;
+    color: #244879;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .layout-card {
+    border: 1px solid #d8e6fb;
+    border-radius: 22px;
+    background: #ffffff;
+    padding: 20px;
+    box-shadow: 0 14px 40px rgba(28, 68, 132, 0.08);
+  }
+
+  .mock {
+    min-height: 620px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #dbe7f7;
+    background: #f6faff;
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1.48fr) 320px;
+  }
+
+  .rail {
+    background: #0f2f54;
+    padding: 16px 12px;
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+
+  .logo {
+    width: 52px;
+    height: 22px;
+    border-radius: 999px;
+    background: #78afff;
+    margin-bottom: 6px;
+  }
+
+  .nav-dot,
+  .nav-short {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .nav-dot {
+    height: 34px;
+  }
+
+  .nav-short {
+    height: 20px;
+    width: 70%;
+  }
+
+  .main {
+    padding: 18px;
+    display: grid;
+    gap: 14px;
+    align-content: start;
+  }
+
+  .topbar {
+    height: 44px;
+    border-radius: 14px;
+    border: 1px solid #dbe7f7;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+  }
+
+  .topbar::before {
+    content: "";
+    width: 220px;
+    height: 12px;
+    border-radius: 999px;
+    background: #c8daf6;
+  }
+
+  .topbar::after {
+    content: "";
+    width: 88px;
+    height: 22px;
+    border-radius: 999px;
+    background: #d9e8ff;
+  }
+
+  .hero {
+    border-radius: 18px;
+    background: linear-gradient(135deg, #d9ebff 0%, #c7e0ff 100%);
+    border: 1px solid #d2e3fc;
+    min-height: 116px;
+    position: relative;
+  }
+
+  .hero-tag,
+  .hero-body,
+  .hero-cta {
+    position: absolute;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.76);
+  }
+
+  .hero-tag {
+    top: 16px;
+    left: 18px;
+    width: 84px;
+    height: 16px;
+  }
+
+  .hero-body {
+    left: 18px;
+    top: 46px;
+    width: 62%;
+    height: 18px;
+  }
+
+  .hero-cta {
+    right: 18px;
+    bottom: 18px;
+    width: 120px;
+    height: 26px;
+  }
+
+  .canvas {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 220px;
+    gap: 14px;
+  }
+
+  .package {
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid #dbe7f7;
+    min-height: 336px;
+    padding: 16px;
+    display: grid;
+    gap: 12px;
+  }
+
+  .package-title,
+  .package-question,
+  .package-strip,
+  .package-block,
+  .package-foot {
+    border-radius: 12px;
+    background: #f4f8ff;
+    border: 1px solid #e0ebfb;
+  }
+
+  .package-title {
+    height: 58px;
+  }
+
+  .package-question {
+    height: 84px;
+  }
+
+  .package-strip {
+    height: 58px;
+  }
+
+  .package-block {
+    height: 74px;
+  }
+
+  .package-foot {
+    height: 44px;
+  }
+
+  .timeline {
+    border-radius: 18px;
+    background: #f2f7ff;
+    border: 1px solid #dbe7f7;
+    padding: 14px;
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+
+  .timeline-step {
+    height: 64px;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid #dbe7f7;
+  }
+
+  .bottom {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .bottom-card {
+    min-height: 116px;
+    border-radius: 16px;
+    border: 1px solid #dbe7f7;
+    background: #ffffff;
+  }
+
+  .assist {
+    padding: 18px 16px;
+    background: #eef5ff;
+    border-left: 1px solid #dbe7f7;
+    display: grid;
+    gap: 14px;
+    align-content: start;
+  }
+
+  .assist-card {
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid #dbe7f7;
+    min-height: 112px;
+  }
+
+  .assist-card.tall {
+    min-height: 188px;
+  }
+
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .legend-item {
+    border-radius: 16px;
+    border: 1px solid #dbe7f7;
+    background: #ffffff;
+    padding: 14px;
+  }
+
+  .legend-item strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #17325c;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .legend-item p {
+    margin: 0;
+    color: #4b6380;
+    line-height: 1.55;
+  }
+
+  .decision {
+    border: 1px solid #dbe7f7;
+    border-radius: 16px;
+    background: #ffffff;
+    padding: 16px;
+  }
+
+  .decision ul {
+    margin: 10px 0 0;
+    padding-left: 18px;
+    color: #49617f;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 1200px) {
+    .mock,
+    .canvas,
+    .bottom,
+    .legend {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="page">
+  <div class="intro">
+    <h2>B 方向细化：Studio First 老师工作台</h2>
+    <p class="subtitle">
+      这一版不是“系统首页”，而是老师一进来就进入工作状态的主屏。它借可汗老师后台的稳定秩序，但把真正最大的面积给
+      “当前微课包”。
+    </p>
+    <div class="pill-row">
+      <div class="pill">主任务：生成并确认微课包</div>
+      <div class="pill">副任务：课堂运行 / 课后回写 / 学生记录</div>
+      <div class="pill">视觉气质：可信、明亮、平静、学术感轻运营</div>
+    </div>
+  </div>
+
+  <div class="layout-card">
+    <div class="mock">
+      <div class="rail">
+        <div class="logo"></div>
+        <div class="nav-dot"></div>
+        <div class="nav-dot"></div>
+        <div class="nav-dot"></div>
+        <div class="nav-dot"></div>
+        <div class="nav-short"></div>
+      </div>
+
+      <div class="main">
+        <div class="topbar"></div>
+        <div class="hero">
+          <div class="hero-tag"></div>
+          <div class="hero-body"></div>
+          <div class="hero-cta"></div>
+        </div>
+
+        <div class="canvas">
+          <div class="package"></div>
+          <div class="timeline">
+            <div class="timeline-step"></div>
+            <div class="timeline-step"></div>
+            <div class="timeline-step"></div>
+            <div class="timeline-step"></div>
+          </div>
+        </div>
+
+        <div class="bottom">
+          <div class="bottom-card"></div>
+          <div class="bottom-card"></div>
+          <div class="bottom-card"></div>
+        </div>
+      </div>
+
+      <div class="assist">
+        <div class="assist-card"></div>
+        <div class="assist-card tall"></div>
+        <div class="assist-card"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <strong>左侧导航</strong>
+      <p>固定保留 5 个一级入口：微课包、课堂运行、课后反馈、学生记录、工具箱。位置稳定，像可汗老师后台。</p>
+    </div>
+    <div class="legend-item">
+      <strong>中间主画布</strong>
+      <p>永远显示“当前微课包”，这里是产品核心，不被各种统计卡和设置面板挤掉。</p>
+    </div>
+    <div class="legend-item">
+      <strong>右侧老师助手</strong>
+      <p>只放老师真正会用的东西：当前建议、支架切换、提醒卡。AI 不直接讲话，只做后台编排结果展示。</p>
+    </div>
+    <div class="legend-item">
+      <strong>下方承接层</strong>
+      <p>展示学生卡片、最近反馈、素材来源，让系统完整但不抢主任务注意力。</p>
+    </div>
+  </div>
+
+  <div class="decision">
+    <strong>这一屏我想先确认的不是细节文案，而是结构判断：</strong>
+    <ul>
+      <li>首页是否应该直接进入“当前微课包工作台”，而不是先看总览统计。</li>
+      <li>右侧老师助手区是否值得长期固定存在，作为这个产品区别于普通后台的关键特征。</li>
+      <li>下方承接层是否足够克制，没有把页面又做回传统管理后台。</li>
+    </ul>
+  </div>
+</div>
+

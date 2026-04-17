@@ -1,0 +1,437 @@
+<style>
+  .directions {
+    display: grid;
+    gap: 18px;
+  }
+
+  .intro {
+    max-width: 920px;
+  }
+
+  .badge-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #edf4ff;
+    color: #1f3f77;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .card {
+    border: 1px solid #d7e2f4;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 8px 30px rgba(49, 93, 164, 0.08);
+    cursor: pointer;
+  }
+
+  .card-image {
+    padding: 18px;
+    background: linear-gradient(180deg, #f7fbff 0%, #eef5ff 100%);
+    border-bottom: 1px solid #e2ecfb;
+  }
+
+  .card-body {
+    padding: 18px;
+  }
+
+  .card h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    color: #17325c;
+  }
+
+  .card p {
+    margin: 0;
+    color: #49617f;
+    line-height: 1.55;
+  }
+
+  .pill-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 12px 0 14px;
+  }
+
+  .pill {
+    padding: 5px 8px;
+    border-radius: 999px;
+    background: #f2f7ff;
+    color: #47638d;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .recommend {
+    background: #dff4dd;
+    color: #265b28;
+  }
+
+  .mini-shell {
+    height: 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #d8e6fb;
+    background: #f8fbff;
+    display: grid;
+    grid-template-columns: 78px minmax(0, 1fr);
+  }
+
+  .mini-shell.runtime {
+    grid-template-columns: 70px minmax(0, 1.15fr) 130px;
+  }
+
+  .mini-shell.studio {
+    grid-template-columns: 78px minmax(0, 1.35fr) 130px;
+  }
+
+  .mini-nav {
+    background: #0f2f54;
+    padding: 12px 10px;
+    display: grid;
+    gap: 8px;
+    align-content: start;
+  }
+
+  .mini-logo {
+    height: 20px;
+    width: 42px;
+    border-radius: 999px;
+    background: #7fb0ff;
+  }
+
+  .mini-nav-item,
+  .mini-nav-item-short {
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .mini-nav-item {
+    height: 26px;
+  }
+
+  .mini-nav-item-short {
+    height: 18px;
+    width: 75%;
+  }
+
+  .mini-main {
+    padding: 14px;
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+
+  .mini-topbar {
+    height: 34px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #dce8f9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+
+  .mini-topbar::before {
+    content: "";
+    width: 120px;
+    height: 10px;
+    border-radius: 999px;
+    background: #c8daf6;
+  }
+
+  .mini-topbar::after {
+    content: "";
+    width: 56px;
+    height: 18px;
+    border-radius: 999px;
+    background: #d7e7ff;
+  }
+
+  .mini-banner {
+    height: 72px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #dfeeff 0%, #cfe3ff 100%);
+    border: 1px solid #d3e4fd;
+  }
+
+  .mini-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .mini-stat,
+  .mini-list-card,
+  .mini-canvas,
+  .mini-rail-card,
+  .mini-runtime-stage,
+  .mini-runtime-card {
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid #dce8f9;
+  }
+
+  .mini-stat {
+    height: 72px;
+  }
+
+  .mini-grid-2 {
+    display: grid;
+    grid-template-columns: 1.25fr 0.95fr;
+    gap: 10px;
+  }
+
+  .mini-list-card {
+    min-height: 118px;
+  }
+
+  .mini-stack {
+    display: grid;
+    gap: 10px;
+  }
+
+  .mini-canvas {
+    min-height: 182px;
+  }
+
+  .mini-right {
+    padding: 12px 10px;
+    background: #f1f6ff;
+    border-left: 1px solid #dce8f9;
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+
+  .mini-rail-card {
+    height: 70px;
+  }
+
+  .mini-runtime-stage {
+    min-height: 224px;
+    background: linear-gradient(180deg, #fefefe 0%, #f6fbff 100%);
+  }
+
+  .mini-runtime-controls {
+    display: grid;
+    gap: 10px;
+  }
+
+  .mini-runtime-card {
+    height: 68px;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .summary-box {
+    border: 1px solid #dce8f9;
+    border-radius: 16px;
+    background: #ffffff;
+    padding: 16px;
+  }
+
+  .summary-box strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #17325c;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .summary-box ul {
+    margin: 0;
+    padding-left: 18px;
+    color: #49617f;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 1100px) {
+    .cards,
+    .summary-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="directions">
+  <div class="intro">
+    <h2>老师后台 UI 方向对比</h2>
+    <p class="subtitle">
+      这三版都借可汗学院老师后台的秩序感、可信度和任务导向，但强调点不同。你这次的产品不是学生学习页，而是
+      “老师备课与带课的工作台”。
+    </p>
+    <div class="badge-row">
+      <div class="badge">Khan 风格来源：左侧导航、清晰卡片、轻运营仪表盘</div>
+      <div class="badge">产品不变：老师主导，AI 幕后编排</div>
+      <div class="badge">首个 demo：10 分钟微课包</div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-image">
+        <div class="mini-shell">
+          <div class="mini-nav">
+            <div class="mini-logo"></div>
+            <div class="mini-nav-item"></div>
+            <div class="mini-nav-item"></div>
+            <div class="mini-nav-item"></div>
+            <div class="mini-nav-item-short"></div>
+          </div>
+          <div class="mini-main">
+            <div class="mini-topbar"></div>
+            <div class="mini-banner"></div>
+            <div class="mini-stats">
+              <div class="mini-stat"></div>
+              <div class="mini-stat"></div>
+              <div class="mini-stat"></div>
+            </div>
+            <div class="mini-grid-2">
+              <div class="mini-list-card"></div>
+              <div class="mini-stack">
+                <div class="mini-list-card"></div>
+                <div class="mini-list-card"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3>A. Dashboard First</h3>
+        <p>最像可汗老师首页。先看到班级、学生、最近微课包和待办，再进入具体编辑。</p>
+        <div class="pill-row">
+          <div class="pill">可信</div>
+          <div class="pill">管理感强</div>
+          <div class="pill">适合讲“平台”故事</div>
+        </div>
+        <p>代价是主任务会多一步，首次 demo 容易看起来像后台系统，而不是一套能直接上课的工具。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">
+        <div class="mini-shell studio">
+          <div class="mini-nav">
+            <div class="mini-logo"></div>
+            <div class="mini-nav-item"></div>
+            <div class="mini-nav-item"></div>
+            <div class="mini-nav-item"></div>
+            <div class="mini-nav-item-short"></div>
+          </div>
+          <div class="mini-main">
+            <div class="mini-topbar"></div>
+            <div class="mini-banner"></div>
+            <div class="mini-canvas"></div>
+            <div class="mini-grid-2">
+              <div class="mini-list-card"></div>
+              <div class="mini-list-card"></div>
+            </div>
+          </div>
+          <div class="mini-right">
+            <div class="mini-rail-card"></div>
+            <div class="mini-rail-card"></div>
+            <div class="mini-rail-card"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3>B. Studio First</h3>
+        <p>左侧是可汗式稳定导航，中间是“当前微课包”主工作区，右侧是 AI 生成的老师动作卡。</p>
+        <div class="pill-row">
+          <div class="pill recommend">推荐</div>
+          <div class="pill">主任务最清楚</div>
+          <div class="pill">像老师工作台</div>
+        </div>
+        <p>最适合这个 demo。既保留后台秩序感，又把“生成、确认、带课、回收反馈”串成一个连续工作流。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">
+        <div class="mini-shell runtime">
+          <div class="mini-nav">
+            <div class="mini-logo"></div>
+            <div class="mini-nav-item"></div>
+            <div class="mini-nav-item"></div>
+            <div class="mini-nav-item-short"></div>
+          </div>
+          <div class="mini-main">
+            <div class="mini-topbar"></div>
+            <div class="mini-runtime-stage"></div>
+            <div class="mini-runtime-controls">
+              <div class="mini-runtime-card"></div>
+              <div class="mini-runtime-card"></div>
+            </div>
+          </div>
+          <div class="mini-right">
+            <div class="mini-rail-card"></div>
+            <div class="mini-rail-card"></div>
+            <div class="mini-rail-card"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3>C. Runtime First</h3>
+        <p>把“上课时正在发生什么”放到最中心，适合强调课堂运行、实时支架和观察信号的切换。</p>
+        <div class="pill-row">
+          <div class="pill">课堂感强</div>
+          <div class="pill">演示冲击力大</div>
+          <div class="pill">适合现场讲故事</div>
+        </div>
+        <p>缺点是备课、课后回写、学生记录会显得像附属页，不利于展示你完整的产品设计能力。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-box">
+      <strong>我建议选 B 的原因</strong>
+      <ul>
+        <li>最贴合“老师主导、AI 幕后”的产品逻辑。</li>
+        <li>最容易把微课包做成一个真正的核心对象，而不是一堆页面。</li>
+        <li>既像成熟教育产品，又能保留你要展示的课程设计能力。</li>
+      </ul>
+    </div>
+    <div class="summary-box">
+      <strong>如果你更重面试观感</strong>
+      <ul>
+        <li>A 会更像完整 SaaS 后台。</li>
+        <li>B 会更像有方法论的教学工作台。</li>
+        <li>C 会更像“现场可跑”的课堂控制系统。</li>
+      </ul>
+    </div>
+    <div class="summary-box">
+      <strong>这轮请你判断</strong>
+      <ul>
+        <li>哪一版最像你想要的可汗老师后台气质。</li>
+        <li>你更想让面试官先看到管理能力，还是先看到教学工作流。</li>
+        <li>如果选 B，我下一轮就把它细化成页面结构和组件层级。</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
