@@ -10,7 +10,6 @@ target/
 .superpowers/
 .venv/
 .DS_Store
-pnpm-lock.yaml
 apps/api/.python-version
 apps/api/.venv/
 
