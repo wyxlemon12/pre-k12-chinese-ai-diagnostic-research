@@ -4,6 +4,10 @@ dist/
 target/
 .codex/
 .codex-logs/
+.corepack/
+.learnings/
+.playwright-cli/
+.superpowers/
 .venv/
 .DS_Store
 pnpm-lock.yaml

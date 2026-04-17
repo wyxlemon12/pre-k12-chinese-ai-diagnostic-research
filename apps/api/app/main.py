@@ -1,11 +1,22 @@
 from collections.abc import Iterable
 from typing import Literal
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 from pydantic import BaseModel, Field
 
+from app.micro_lessons import (
+    ClassroomRecommendation,
+    ClassroomSignalRequest,
+    ConfirmMicroLessonRequest,
+    MicroLessonDraftRequest,
+    MicroLessonPackage,
+    ReflectionRequest,
+    route_signal,
+    synthesize_reflection,
+    _lesson_designer,
+)
 from app.settings import settings
 
 
@@ -361,6 +372,8 @@ app = FastAPI(
     summary="Harness service for lesson parsing and recommendation workflows.",
 )
 
+MICRO_LESSON_STORE: dict[str, MicroLessonPackage] = {}
+
 ALLOWED_ORIGINS = {
     "http://127.0.0.1:5173",
     "http://localhost:5173",
@@ -488,3 +501,74 @@ def diagnose_observations(payload: DiagnoseRequest) -> DiagnoseResponse:
         evidence_chain=evidence_chain,
         next_steps=next_steps,
     )
+
+
+@app.get("/api/v1/micro-lessons", response_model=list[MicroLessonPackage])
+def list_micro_lessons() -> list[MicroLessonPackage]:
+    return list(MICRO_LESSON_STORE.values())[::-1]
+
+
+@app.post("/api/v1/micro-lessons/draft", response_model=MicroLessonPackage)
+def create_micro_lesson_draft(payload: MicroLessonDraftRequest) -> MicroLessonPackage:
+    package = _lesson_designer(payload)
+    MICRO_LESSON_STORE[package.id] = package
+    return package
+
+
+@app.get("/api/v1/micro-lessons/{package_id}", response_model=MicroLessonPackage)
+def get_micro_lesson(package_id: str) -> MicroLessonPackage:
+    package = MICRO_LESSON_STORE.get(package_id)
+    if package is None:
+        raise HTTPException(status_code=404, detail="Micro lesson package not found.")
+    return package
+
+
+@app.post(
+    "/api/v1/micro-lessons/{package_id}/confirm",
+    response_model=MicroLessonPackage,
+)
+def confirm_micro_lesson(
+    package_id: str, payload: ConfirmMicroLessonRequest
+) -> MicroLessonPackage:
+    package = MICRO_LESSON_STORE.get(package_id)
+    if package is None:
+        raise HTTPException(status_code=404, detail="Micro lesson package not found.")
+
+    updated = package.model_copy(
+        update={
+            "status": "confirmed",
+            "hook": payload.hook.strip() if payload.hook else package.hook,
+            "core_question": (
+                payload.core_question.strip()
+                if payload.core_question
+                else package.core_question
+            ),
+        }
+    )
+    MICRO_LESSON_STORE[package_id] = updated
+    return updated
+
+
+@app.post(
+    "/api/v1/micro-lessons/{package_id}/classroom-signal",
+    response_model=ClassroomRecommendation,
+)
+def apply_classroom_signal(
+    package_id: str, payload: ClassroomSignalRequest
+) -> ClassroomRecommendation:
+    package = MICRO_LESSON_STORE.get(package_id)
+    if package is None:
+        raise HTTPException(status_code=404, detail="Micro lesson package not found.")
+    return route_signal(package, payload)
+
+
+@app.post("/api/v1/micro-lessons/{package_id}/reflect", response_model=MicroLessonPackage)
+def reflect_micro_lesson(
+    package_id: str, payload: ReflectionRequest
+) -> MicroLessonPackage:
+    package = MICRO_LESSON_STORE.get(package_id)
+    if package is None:
+        raise HTTPException(status_code=404, detail="Micro lesson package not found.")
+    updated = synthesize_reflection(package, payload)
+    MICRO_LESSON_STORE[package_id] = updated
+    return updated
